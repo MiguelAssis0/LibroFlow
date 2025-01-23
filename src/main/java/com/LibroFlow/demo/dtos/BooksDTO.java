@@ -16,18 +16,18 @@ public class BooksDTO {
     @NotBlank
     private String description;
     @Positive
-    private double price;
+    private Integer quantity;
     private Boolean available;
 
     public BooksDTO() {}
 
-    public BooksDTO(Long id,String title, String author, Genre genre, String description, double price, Boolean available) {
+    public BooksDTO(Long id,String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
         setId(id);
         setTitle(title);
         setAuthor(author);
         setGenre(genre);
         setDescription(description);
-        setPrice(price);
+        setQuantity(quantity);
         setAvailable(available);
     }
 
@@ -46,8 +46,8 @@ public class BooksDTO {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = BooksDTO.this.quantity; }
 
     public Boolean getAvailable() { return available; }
     public void setAvailable(Boolean available) { this.available = available; }

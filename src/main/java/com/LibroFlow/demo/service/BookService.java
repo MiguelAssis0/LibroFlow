@@ -15,18 +15,18 @@ public class BookService {
     private BooksRepository bookRepository;
 
     public void createBook(BooksDTO dto){
-        Books book = new Books(dto.getTitle(), dto.getAuthor(), dto.getGenre(), dto.getDescription(), dto.getPrice(), dto.getAvailable());
+        Books book = new Books(dto.getTitle(), dto.getAuthor(), dto.getGenre(), dto.getDescription(), dto.getQuantity(), dto.getAvailable());
         bookRepository.save(book);
     }
 
     public Page<BooksDTO> findAllBooks(Pageable pageable){
         Page<Books> books = bookRepository.findAll(pageable);
-        return books.map(book -> new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getPrice(), book.getAvailable()));
+        return books.map(book -> new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable()));
     }
 
     public BooksDTO findByTitle(String title){
         Books book = bookRepository.findByTitle(title);
-        return new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getPrice(), book.getAvailable());
+        return new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 
     public void deleteBook(Long id){
@@ -40,9 +40,9 @@ public class BookService {
         if(dto.getAvailable() != null) book.setAvailable(dto.getAvailable());
         if(dto.getGenre() != null) book.setGenre(dto.getGenre());
         if(dto.getDescription() != null) book.setDescription(dto.getDescription());
-        if(dto.getPrice() != book.getPrice() && dto.getPrice() > 0) book.setPrice(dto.getPrice());
+        if(dto.getQuantity() != book.getQuantity() && dto.getQuantity() > 0) book.setQuantity(dto.getQuantity());
 
         bookRepository.save(book);
-        return new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getPrice(), book.getAvailable());
+        return new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 }

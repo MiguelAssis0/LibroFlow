@@ -15,16 +15,16 @@ public class Books {
     @Enumerated(EnumType.STRING)
     private Genre genre;
     private String description;
-    private double price;
+    private Integer quantity;
     private Boolean available;
 
     public Books(){}
-    public Books(String title, String author, Genre genre, String description, double price, Boolean available) {
+    public Books(String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
         setTitle(title);
         setAuthor(author);
         setGenre(genre);
         setDescription(description);
-        setPrice(price);
+        setQuantity(quantity);
         setAvailable(available);
     }
 
@@ -43,8 +43,8 @@ public class Books {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public double getPrice() { return price; }
-    public void setPrice(double price) { this.price = price; }
+    public Integer getQuantity() { return quantity; }
+    public void setQuantity(Integer quantity) { this.quantity = quantity; }
 
     public Boolean getAvailable() { return available; }
     public void setAvailable(Boolean available) { this.available = available; }
