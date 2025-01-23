@@ -9,9 +9,10 @@ import java.util.Objects;
 @Table(name = "borrowed_books")
 public class BorrowedBooks {
     @EmbeddedId
-    private  BorrowedBooksPK id;
+    private BorrowedBooksPK id;
     private String borrowDate;
     private String returnDate;
+    private Boolean isReturned;
 
     public BorrowedBooks() {}
 
@@ -19,6 +20,7 @@ public class BorrowedBooks {
         this.id = new BorrowedBooksPK(user, books);
         this.borrowDate = borrowedBooksDTO.getBorrowDate();
         this.returnDate = borrowedBooksDTO.getReturnDate();
+        this.isReturned = borrowedBooksDTO.getIsReturned();
     }
 
     public BorrowedBooksPK getId() {
@@ -43,6 +45,14 @@ public class BorrowedBooks {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Boolean getIsReturned() {
+        return isReturned;
+    }
+
+    public void setIsReturned(Boolean isReturned) {
+        this.isReturned = isReturned;
     }
 
     @Override

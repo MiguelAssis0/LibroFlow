@@ -37,5 +37,5 @@ public interface BorrowedBooksRepository extends JpaRepository<BorrowedBooks, Lo
         user_id = :userId AND
         book_id = :bookId
     """)
-    BorrowedBooks findByUserAndBook(Long userId, Long bookId);
+    BorrowedBooks findByUserAndBook(Long user, Long book);
 }

@@ -6,6 +6,7 @@ import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.projections.BorrowedBooksProjection;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class BorrowedBooksDTO {
     private Long userId;
@@ -14,6 +15,8 @@ public class BorrowedBooksDTO {
     private String borrowDate;
     @NotBlank
     private String returnDate;
+    @NotNull
+    private Boolean isReturned;
 
     public BorrowedBooksDTO() {}
 
@@ -22,14 +25,20 @@ public class BorrowedBooksDTO {
         this.bookId = borrowedBooks.getId().getBook().getId();
         this.borrowDate = borrowedBooks.getBorrowDate();
         this.returnDate = borrowedBooks.getReturnDate();
+        this.isReturned = borrowedBooks.getIsReturned();
     }
 
-    public BorrowedBooksDTO(Long userId, Long bookId, String borrowDate, String returnDate) {
+    public BorrowedBooksDTO(Long userId, Long bookId, String borrowDate, String returnDate, Boolean isReturned) {
         this.userId = userId;
         this.bookId = bookId;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
+        this.isReturned = isReturned;
+    }
 
+    public BorrowedBooksDTO(Long userId, Long bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
     }
 
     public BorrowedBooksDTO(BorrowedBooksProjection borrowedBook) {
@@ -66,6 +75,14 @@ public class BorrowedBooksDTO {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Boolean getIsReturned() {
+        return isReturned;
+    }
+
+    public void setIsReturned(Boolean isReturned) {
+        this.isReturned = isReturned;
     }
 }
 

@@ -2,6 +2,7 @@ package com.LibroFlow.demo.controllers;
 
 import com.LibroFlow.demo.dtos.BorrowedBooksDTO;
 import com.LibroFlow.demo.dtos.BorrowedBooksProjectionDTO;
+import com.LibroFlow.demo.dtos.ReturnBookDTO;
 import com.LibroFlow.demo.entities.BorrowedBooks;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.service.BorrowedBooksService;
@@ -22,7 +23,7 @@ public class BorrowedBooksController {
     private BorrowedBooksService borrowedBooksService;
 
     @PostMapping
-    public ResponseEntity<BorrowedBooksDTO> createBorrowedBooks(@RequestBody BorrowedBooksDTO borrowedBooksDTO) {
+    public ResponseEntity<BorrowedBooksDTO> createBorrowedBooks(@Validated @RequestBody BorrowedBooksDTO borrowedBooksDTO) {
         BorrowedBooksDTO borrowedBooks = borrowedBooksService.createBorrowedBooks(borrowedBooksDTO);
         URI address = URI.create("/borrowedbooks/" + borrowedBooks);
         return ResponseEntity.created(address).body(borrowedBooks);
@@ -33,6 +34,13 @@ public class BorrowedBooksController {
         Page<BorrowedBooksProjectionDTO> borrowedBooks = borrowedBooksService.getAllBorrowedBooks(pageable);
         return ResponseEntity.ok(borrowedBooks);
     }
+
+    @PostMapping("/return")
+    public ResponseEntity<Void> returnBook(@RequestBody ReturnBookDTO returnBookDTO) {
+        borrowedBooksService.returnBook(returnBookDTO.getUsername(), returnBookDTO.getTitle());
+        return ResponseEntity.noContent().build();
+    }
+
 
 
 }

@@ -7,4 +7,5 @@ public interface BorrowedBooksProjection {
     String getBookTitle();
     String getBorrowDate();
     String getReturnDate();
+    Boolean getIsReturned();
 }

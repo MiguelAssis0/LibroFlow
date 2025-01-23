@@ -1,6 +1,7 @@
 package com.LibroFlow.demo.dtos;
 
 import com.LibroFlow.demo.projections.BorrowedBooksProjection;
+import jakarta.validation.constraints.NotNull;
 
 
 public class BorrowedBooksProjectionDTO {
@@ -8,12 +9,14 @@ public class BorrowedBooksProjectionDTO {
     private String bookTitle;
     private String borrowDate;
     private String returnDate;
+    private Boolean isReturned;
 
     public BorrowedBooksProjectionDTO(BorrowedBooksProjection borrowedBook) {
         this.userName = borrowedBook.getUserName();
         this.bookTitle = borrowedBook.getBookTitle();
         this.borrowDate = borrowedBook.getBorrowDate();
         this.returnDate = borrowedBook.getReturnDate();
+        this.isReturned = borrowedBook.getIsReturned();
     }
 
     public String getUserName() {
@@ -46,5 +49,13 @@ public class BorrowedBooksProjectionDTO {
 
     public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
+    }
+
+    public Boolean getIsReturned() {
+        return isReturned;
+    }
+
+    public void setIsReturned(Boolean isReturned) {
+        this.isReturned = isReturned;
     }
 }
