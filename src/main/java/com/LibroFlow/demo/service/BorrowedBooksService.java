@@ -16,4 +16,16 @@ public class BorrowedBooksService {
         borrowedBooksRepository.save(borrowedBooks);
         return new BorrowedBooksDTO(borrowedBooks);
     }
+
+
+    public BorrowedBooksDTO getBorrowedBooks(Long id) {
+        BorrowedBooks borrowedBooks = borrowedBooksRepository.findById(id).orElse(null);
+        return new BorrowedBooksDTO(borrowedBooks);
+    }
+
+
+    public BorrowedBooksDTO getBorrowedBooksByUser(Long id) {
+        BorrowedBooks borrowedBooks = borrowedBooksRepository.findByUser(id);
+        return new BorrowedBooksDTO(borrowedBooks);
+    }
 }

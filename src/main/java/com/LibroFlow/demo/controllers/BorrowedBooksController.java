@@ -5,10 +5,7 @@ import com.LibroFlow.demo.service.BorrowedBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -23,5 +20,17 @@ public class BorrowedBooksController {
         BorrowedBooksDTO borrowedBooks = borrowedBooksService.createBorrowedBooks(dto);
         URI address = URI.create("/borrowedbooks/" + borrowedBooks.getId());
         return ResponseEntity.created(address).body(borrowedBooks);
+    }
+
+    @GetMapping
+    public ResponseEntity<BorrowedBooksDTO> getBorrowedBooks(@PathVariable Long id) {
+        BorrowedBooksDTO borrowedBooks = borrowedBooksService.getBorrowedBooks(id);
+        return ResponseEntity.ok(borrowedBooks);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<BorrowedBooksDTO> getBorrowedBooksByUser(@PathVariable Long id) {
+        BorrowedBooksDTO borrowedBooks = borrowedBooksService.getBorrowedBooksByUser(id);
+        return ResponseEntity.ok(borrowedBooks);
     }
 }
