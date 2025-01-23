@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -18,9 +20,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserDTO getAllUsers(){
-        User user = userRepository.findAll().get(0);
-        return new UserDTO(user.getUsername(), user.getEmail(), user.getPassword());
+    public List<UserDTO> getAllUsers(){
+        List<User> users = userRepository.findAll();
+        return users.stream().map(user -> new UserDTO(user.getUsername(), user.getEmail(), user.getPassword())).toList();
     }
 
     public UserDTO getUserByName(String username){
