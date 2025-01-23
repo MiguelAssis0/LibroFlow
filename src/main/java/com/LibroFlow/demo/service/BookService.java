@@ -15,7 +15,9 @@ public class BookService {
     private BooksRepository bookRepository;
 
     public void createBook(BooksDTO dto){
-        Books book = new Books(dto.getTitle(), dto.getAuthor(), dto.getGenre(), dto.getDescription(), dto.getQuantity(), dto.getAvailable());
+        System.out.println(dto.getQuantity());
+        Books book = new Books(dto);
+        System.out.println(book.getQuantity());
         bookRepository.save(book);
     }
 

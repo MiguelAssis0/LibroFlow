@@ -3,6 +3,7 @@ package com.LibroFlow.demo.dtos;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 public class BooksDTO {
@@ -17,6 +18,7 @@ public class BooksDTO {
     private String description;
     @Positive
     private Integer quantity;
+    @NotNull
     private Boolean available;
 
     public BooksDTO() {}
@@ -47,7 +49,7 @@ public class BooksDTO {
     public void setDescription(String description) { this.description = description; }
 
     public Integer getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = BooksDTO.this.quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
 
     public Boolean getAvailable() { return available; }
     public void setAvailable(Boolean available) { this.available = available; }

@@ -1,6 +1,7 @@
 package com.LibroFlow.demo.entities;
 
 
+import com.LibroFlow.demo.dtos.BooksDTO;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 
@@ -14,18 +15,20 @@ public class Books {
     private String author;
     @Enumerated(EnumType.STRING)
     private Genre genre;
+    @Column(columnDefinition = "TEXT")
     private String description;
     private Integer quantity;
     private Boolean available;
 
     public Books(){}
-    public Books(String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
-        setTitle(title);
-        setAuthor(author);
-        setGenre(genre);
-        setDescription(description);
-        setQuantity(quantity);
-        setAvailable(available);
+
+    public Books(BooksDTO dto) {
+        setTitle(dto.getTitle());
+        setAuthor(dto.getAuthor());
+        setGenre(dto.getGenre());
+        setDescription(dto.getDescription());
+        setQuantity(dto.getQuantity());
+        setAvailable(dto.getAvailable());
     }
 
     public Long getId() { return id; }
