@@ -16,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@Validated UserDTO dto) {
+    public ResponseEntity<Void> createUser(@Validated @RequestBody UserDTO dto) {
         userService.createUser(dto);
         URI address = URI.create("/users");
         return ResponseEntity.created(address).build();
@@ -28,9 +28,9 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        UserDTO user = userService.getUserById(id);
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable String username) {
+        UserDTO user = userService.getUserByName(username);
         return ResponseEntity.ok(user);
     }
 }

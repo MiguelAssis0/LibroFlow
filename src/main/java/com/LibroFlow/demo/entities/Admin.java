@@ -15,17 +15,17 @@ public class Admin {
     public Admin() {}
 
     public Admin(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
+        this.username = username.toLowerCase();
+        this.email = email.toLowerCase();
         this.password = password;
     }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public String getUsername() { return this.username.substring(0, 1).toUpperCase() + this.username.substring(1); }
+    public void setUsername(String username) { this.username = username.toLowerCase(); }
+    public String getEmail() { return email.toLowerCase(); }
+    public void setEmail(String email) { this.email = email.toLowerCase(); }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 }

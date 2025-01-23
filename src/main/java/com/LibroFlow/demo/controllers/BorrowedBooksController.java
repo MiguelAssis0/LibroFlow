@@ -1,6 +1,7 @@
 package com.LibroFlow.demo.controllers;
 
 import com.LibroFlow.demo.dtos.BorrowedBooksDTO;
+import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.service.BorrowedBooksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,8 @@ public class BorrowedBooksController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<BorrowedBooksDTO> getBorrowedBooksByUser(@PathVariable Long id) {
-        BorrowedBooksDTO borrowedBooks = borrowedBooksService.getBorrowedBooksByUser(id);
+    public ResponseEntity<BorrowedBooksDTO> getBorrowedBooksByUser(@RequestBody User user) {
+        BorrowedBooksDTO borrowedBooks = borrowedBooksService.getBorrowedBooksByUser(user);
         return ResponseEntity.ok(borrowedBooks);
     }
 }
