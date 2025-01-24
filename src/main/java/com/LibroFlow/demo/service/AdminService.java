@@ -2,6 +2,7 @@ package com.LibroFlow.demo.service;
 
 import com.LibroFlow.demo.dtos.AdminDTO;
 import com.LibroFlow.demo.entities.Admin;
+import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +18,7 @@ public class AdminService {
     }
 
     public void login(AdminDTO dto){
-        Admin admin = (Admin) adminRepository.findByUsername(dto.getUsername());
-        if(admin.getEmail().equals(dto.getEmail()) && admin.getPassword().equals(dto.getPassword())){
-            System.out.println("Login successful");
-        }
-        else{
-            System.out.println("Login failed");
-        }
+        Admin admin = adminRepository.findByUsername(dto.getUsername());
+        if(admin == null) throw new EventNotFoundException("Esse administrador não existe");
     }
 }

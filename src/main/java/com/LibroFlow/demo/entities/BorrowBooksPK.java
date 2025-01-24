@@ -5,7 +5,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Embeddable
-public class BorrowedBooksPK {
+public class BorrowBooksPK {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -13,9 +13,9 @@ public class BorrowedBooksPK {
     @JoinColumn(name = "book_id")
     private Books book;
 
-    public BorrowedBooksPK() {}
+    public BorrowBooksPK() {}
 
-    public BorrowedBooksPK(User user, Books book) {
+    public BorrowBooksPK(User user, Books book) {
         this.user = user;
         this.book = book;
     }

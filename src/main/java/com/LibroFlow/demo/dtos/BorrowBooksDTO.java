@@ -1,16 +1,12 @@
 package com.LibroFlow.demo.dtos;
 
-import com.LibroFlow.demo.entities.Books;
-import com.LibroFlow.demo.entities.BorrowedBooks;
-import com.LibroFlow.demo.entities.User;
-import com.LibroFlow.demo.projections.BorrowedBooksProjection;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import com.LibroFlow.demo.entities.BorrowBooks;
+import com.LibroFlow.demo.projections.BorrowBooksProjection;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public class BorrowedBooksDTO {
+public class BorrowBooksDTO {
     private Long userId;
     private Long bookId;
     @NotNull
@@ -18,28 +14,28 @@ public class BorrowedBooksDTO {
     @NotNull
     private Boolean isReturned;
 
-    public BorrowedBooksDTO() {}
+    public BorrowBooksDTO() {}
 
-    public BorrowedBooksDTO(BorrowedBooks borrowedBooks) {
-        this.userId = borrowedBooks.getId().getUser().getId();
-        this.bookId = borrowedBooks.getId().getBook().getId();
-        this.returnDate = borrowedBooks.getReturnDate();
-        this.isReturned = borrowedBooks.getIsReturned();
+    public BorrowBooksDTO(BorrowBooks borrowBooks) {
+        this.userId = borrowBooks.getId().getUser().getId();
+        this.bookId = borrowBooks.getId().getBook().getId();
+        this.returnDate = borrowBooks.getReturnDate();
+        this.isReturned = borrowBooks.getIsReturned();
     }
 
-    public BorrowedBooksDTO(Long userId, Long bookId, LocalDate returnDate, Boolean isReturned) {
+    public BorrowBooksDTO(Long userId, Long bookId, LocalDate returnDate, Boolean isReturned) {
         this.userId = userId;
         this.bookId = bookId;
         this.returnDate = returnDate;
         this.isReturned = isReturned;
     }
 
-    public BorrowedBooksDTO(Long userId, Long bookId) {
+    public BorrowBooksDTO(Long userId, Long bookId) {
         this.userId = userId;
         this.bookId = bookId;
     }
 
-    public BorrowedBooksDTO(BorrowedBooksProjection borrowedBook) {
+    public BorrowBooksDTO(BorrowBooksProjection borrowedBook) {
     }
 
     // Getters and Setters

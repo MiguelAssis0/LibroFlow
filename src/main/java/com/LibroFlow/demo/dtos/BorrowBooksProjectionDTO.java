@@ -1,13 +1,11 @@
 package com.LibroFlow.demo.dtos;
 
-import com.LibroFlow.demo.projections.BorrowedBooksProjection;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.NotNull;
+import com.LibroFlow.demo.projections.BorrowBooksProjection;
 
 import java.time.LocalDate;
 
 
-public class BorrowedBooksProjectionDTO {
+public class BorrowBooksProjectionDTO {
     private String userName;
     private String bookTitle;
     private LocalDate borrowDate;
@@ -15,7 +13,7 @@ public class BorrowedBooksProjectionDTO {
     private LocalDate returnDate;
     private Boolean isReturned;
 
-    public BorrowedBooksProjectionDTO(BorrowedBooksProjection borrowedBook) {
+    public BorrowBooksProjectionDTO(BorrowBooksProjection borrowedBook) {
         this.userName = borrowedBook.getUserName();
         this.bookTitle = borrowedBook.getBookTitle();
         this.borrowDate = borrowedBook.getBorrowDate();

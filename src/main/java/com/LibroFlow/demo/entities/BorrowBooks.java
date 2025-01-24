@@ -1,6 +1,6 @@
 package com.LibroFlow.demo.entities;
 
-import com.LibroFlow.demo.dtos.BorrowedBooksDTO;
+import com.LibroFlow.demo.dtos.BorrowBooksDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,28 +8,28 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "borrowed_books")
-public class BorrowedBooks {
+public class BorrowBooks {
     @EmbeddedId
-    private BorrowedBooksPK id;
+    private BorrowBooksPK id;
     @Column(name = "borrow_date", nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate borrowDate = LocalDate.now();
     @Column(name = "return_date", nullable = false)
     private LocalDate returnDate;
     private Boolean isReturned;
 
-    public BorrowedBooks() {}
+    public BorrowBooks() {}
 
-    public BorrowedBooks(BorrowedBooksDTO borrowedBooksDTO, User user, Books books) {
-        this.id = new BorrowedBooksPK(user, books);
-        this.returnDate = borrowedBooksDTO.getReturnDate();
-        this.isReturned = borrowedBooksDTO.getIsReturned();
+    public BorrowBooks(BorrowBooksDTO borrowBooksDTO, User user, Books books) {
+        this.id = new BorrowBooksPK(user, books);
+        this.returnDate = borrowBooksDTO.getReturnDate();
+        this.isReturned = borrowBooksDTO.getIsReturned();
     }
 
-    public BorrowedBooksPK getId() {
+    public BorrowBooksPK getId() {
         return id;
     }
 
-    public void setId(BorrowedBooksPK id) {
+    public void setId(BorrowBooksPK id) {
         this.id = id;
     }
 
@@ -60,7 +60,7 @@ public class BorrowedBooks {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        BorrowedBooks that = (BorrowedBooks) o;
+        BorrowBooks that = (BorrowBooks) o;
         return Objects.equals(id, that.id) && Objects.equals(borrowDate, that.borrowDate) && Objects.equals(returnDate, that.returnDate);
     }
 

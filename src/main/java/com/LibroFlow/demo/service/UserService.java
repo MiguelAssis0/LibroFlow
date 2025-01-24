@@ -2,6 +2,7 @@ package com.LibroFlow.demo.service;
 
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.entities.User;
+import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class UserService {
 
     public List<UserDTO> getAllUsers(){
         List<User> users = userRepository.findAll();
+        if(users.isEmpty()) throw new EventNotFoundException("Usuários não encontrados");
         return users.stream().map(user -> new UserDTO(user.getUsername(), user.getEmail(), user.getPassword())).toList();
     }
 

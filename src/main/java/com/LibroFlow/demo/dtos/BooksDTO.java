@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+
 public class BooksDTO {
     private Long id;
     @NotBlank
@@ -24,13 +25,13 @@ public class BooksDTO {
     public BooksDTO() {}
 
     public BooksDTO(Long id,String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
-        setId(id);
-        setTitle(title);
-        setAuthor(author);
-        setGenre(genre);
-        setDescription(description);
-        setQuantity(quantity);
-        setAvailable(available);
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.description = description;
+        this.quantity = quantity;
+        this.available = available;
     }
 
     public Long getId() { return id; }
