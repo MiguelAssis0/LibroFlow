@@ -2,9 +2,9 @@ package com.LibroFlow.demo.controllers;
 
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,7 +17,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<Void> createUser(@Validated @RequestBody UserDTO dto) {
+    public ResponseEntity<Void> createUser(@Valid @RequestBody UserDTO dto) {
         userService.createUser(dto);
         URI address = URI.create("/users");
         return ResponseEntity.created(address).build();

@@ -4,12 +4,12 @@ import com.LibroFlow.demo.dtos.BorrowBooksDTO;
 import com.LibroFlow.demo.dtos.BorrowBooksProjectionDTO;
 import com.LibroFlow.demo.dtos.ReturnBookDTO;
 import com.LibroFlow.demo.service.BorrowBooksService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -21,7 +21,7 @@ public class BorrowBooksController {
     private BorrowBooksService borrowBooksService;
 
     @PostMapping
-    public ResponseEntity<BorrowBooksDTO> createBorrowedBooks(@Validated @RequestBody BorrowBooksDTO borrowBooksDTO) {
+    public ResponseEntity<BorrowBooksDTO> createBorrowedBooks(@Valid @RequestBody BorrowBooksDTO borrowBooksDTO) {
         BorrowBooksDTO borrowedBooks = borrowBooksService.createBorrowedBooks(borrowBooksDTO);
         URI address = URI.create("/borrowbooks/" + borrowedBooks);
         return ResponseEntity.created(address).body(borrowedBooks);
@@ -40,7 +40,7 @@ public class BorrowBooksController {
     }
 
     @PostMapping("/return")
-    public ResponseEntity<Void> returnBook(@RequestBody ReturnBookDTO returnBookDTO) {
+    public ResponseEntity<Void> returnBook(@Valid @RequestBody ReturnBookDTO returnBookDTO) {
         borrowBooksService.returnBook(returnBookDTO);
         return ResponseEntity.noContent().build();
     }

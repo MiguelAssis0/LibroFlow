@@ -1,7 +1,11 @@
 package com.LibroFlow.demo.dtos;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ReturnBookDTO {
+    @NotBlank
     private String username;
+    @NotBlank
     private String title;
 
     public ReturnBookDTO() {}

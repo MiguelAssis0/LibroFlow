@@ -4,7 +4,6 @@ import com.LibroFlow.demo.dtos.BooksDTO;
 import com.LibroFlow.demo.entities.Books;
 import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.repository.BooksRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

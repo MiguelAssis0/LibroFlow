@@ -2,6 +2,7 @@ package com.LibroFlow.demo.controllers;
 
 import com.LibroFlow.demo.dtos.AdminDTO;
 import com.LibroFlow.demo.service.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping
-    public ResponseEntity<Void> createAdmin(@RequestBody AdminDTO dto) {
+    public ResponseEntity<Void> createAdmin(@RequestBody @Valid AdminDTO dto) {
         adminService.createAdmin(dto);
         URI address = URI.create("/admin/" + dto.getId());
         return ResponseEntity.created(address).build();
