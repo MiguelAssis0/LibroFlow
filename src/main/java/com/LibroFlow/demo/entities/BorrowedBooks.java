@@ -3,6 +3,7 @@ package com.LibroFlow.demo.entities;
 import com.LibroFlow.demo.dtos.BorrowedBooksDTO;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -10,15 +11,16 @@ import java.util.Objects;
 public class BorrowedBooks {
     @EmbeddedId
     private BorrowedBooksPK id;
-    private String borrowDate;
-    private String returnDate;
+    @Column(name = "borrow_date", nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
+    private LocalDate borrowDate = LocalDate.now();
+    @Column(name = "return_date", nullable = false)
+    private LocalDate returnDate;
     private Boolean isReturned;
 
     public BorrowedBooks() {}
 
     public BorrowedBooks(BorrowedBooksDTO borrowedBooksDTO, User user, Books books) {
         this.id = new BorrowedBooksPK(user, books);
-        this.borrowDate = borrowedBooksDTO.getBorrowDate();
         this.returnDate = borrowedBooksDTO.getReturnDate();
         this.isReturned = borrowedBooksDTO.getIsReturned();
     }
@@ -31,19 +33,19 @@ public class BorrowedBooks {
         this.id = id;
     }
 
-    public String getBorrowDate() {
+    public LocalDate getBorrowDate() {
         return borrowDate;
     }
 
-    public void setBorrowDate(String borrowDate) {
+    public void setBorrowDate(LocalDate borrowDate) {
         this.borrowDate = borrowDate;
     }
 
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
 

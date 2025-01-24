@@ -35,11 +35,18 @@ public class BorrowedBooksController {
         return ResponseEntity.ok(borrowedBooks);
     }
 
+    @GetMapping("/returned")
+    public ResponseEntity<Page<BorrowedBooksProjectionDTO>> getReturnedBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
+        Page<BorrowedBooksProjectionDTO> borrowedBooks = borrowedBooksService.getAllReturnedBooks(pageable);
+        return ResponseEntity.ok(borrowedBooks);
+    }
+
     @PostMapping("/return")
     public ResponseEntity<Void> returnBook(@RequestBody ReturnBookDTO returnBookDTO) {
         borrowedBooksService.returnBook(returnBookDTO.getUsername(), returnBookDTO.getTitle());
         return ResponseEntity.noContent().build();
     }
+
 
 
 

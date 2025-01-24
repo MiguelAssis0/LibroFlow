@@ -38,4 +38,22 @@ public interface BorrowedBooksRepository extends JpaRepository<BorrowedBooks, Lo
         book_id = :bookId
     """)
     BorrowedBooks findByUserAndBook(Long userId, Long bookId);
+
+    @Query(nativeQuery = true, value = """
+    SELECT
+        u.username AS user_name,
+        b.title AS book_title,
+        bb.borrow_date,
+        bb.return_date,
+        bb.is_returned
+    FROM
+        borrowed_books bb
+    JOIN
+        users u ON bb.user_id = u.id
+    JOIN
+        books b ON bb.book_id = b.id
+    WHERE
+        bb.is_returned = true;
+""")
+    Page<BorrowedBooksProjection> findAllReturnedBooks(Pageable pageable);
 }

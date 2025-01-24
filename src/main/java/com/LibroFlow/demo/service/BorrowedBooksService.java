@@ -28,27 +28,27 @@ public class BorrowedBooksService {
     public BorrowedBooksDTO createBorrowedBooks(BorrowedBooksDTO borrowedBooksDTO) {
         User user = new User();
         user.setId(borrowedBooksDTO.getUserId());
-
         Books book = booksRepository.findById(borrowedBooksDTO.getBookId()).orElseThrow(RuntimeException::new);
-
         if(book.getQuantity() < 1){
             throw new RuntimeException("Livro indisponivel");
         }
-
         book.setQuantity(book.getQuantity() - 1);
+
         booksRepository.save(book);
-
         BorrowedBooks borrowedBooks = new BorrowedBooks(borrowedBooksDTO, user, book);
-
         borrowedBooksRepository.save(borrowedBooks);
 
         return new BorrowedBooksDTO(borrowedBooks);
-
     }
 
     public Page<BorrowedBooksProjectionDTO> getAllBorrowedBooks(Pageable pageable) {
         Page<BorrowedBooksProjection> borrowBooks = borrowedBooksRepository.findAllBorrowedBooks(pageable);
         return borrowBooks.map(BorrowedBooksProjectionDTO::new);
+    }
+
+    public Page<BorrowedBooksProjectionDTO> getAllReturnedBooks(Pageable pageable) {
+        Page<BorrowedBooksProjection> returnedBooks = borrowedBooksRepository.findAllReturnedBooks(pageable);
+        return returnedBooks.map(BorrowedBooksProjectionDTO::new);
     }
 
     public void returnBook(String username, String title){
@@ -61,6 +61,3 @@ public class BorrowedBooksService {
         booksRepository.save(book);
     }
 }
-
-
-

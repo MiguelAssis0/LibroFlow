@@ -5,7 +5,7 @@ import java.time.LocalDate;
 public interface BorrowedBooksProjection {
     String getUserName();
     String getBookTitle();
-    String getBorrowDate();
-    String getReturnDate();
+    LocalDate getBorrowDate();
+    LocalDate getReturnDate();
     Boolean getIsReturned();
 }
