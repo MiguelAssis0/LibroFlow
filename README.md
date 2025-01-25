@@ -4,9 +4,10 @@
 ## Descrição
 Este é um projeto feito com Java Spring Boot, onde consiste em uma API para um gerenciamento de biblioteca, com onde é possível cadastrar livros, realiza empréstimos e cadastrar usuários com diferentes tipos de permissão.
 
-## Versão
+## Especificações
 - Java 17
-- Spring
+- Spring Boot 3.4.2
+- Maven
 
 ## Documentação
 
