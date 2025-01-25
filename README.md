@@ -28,22 +28,17 @@ localhost:8080/login <br/>
 a partir dessa rota, você deverá indicar em um JSON o username e o password. Após fazer isso, será gerado um token, onde deverá ser inserido para fazer as requisições nas demais rotas da aplicação. <br/>
 
 - Login como administrador:
-<br/>
-<code>
+
     {
         "username":"admin",
         "password":"12345"
     }
-</code>
-<br/>
 - Login como usuário do sistema:
-<br/>
-<code>
+
     {
         "username":"user",
         "password":"12345"
     }
-</code>
 
 ## Enums
 
