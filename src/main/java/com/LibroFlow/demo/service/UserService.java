@@ -47,4 +47,8 @@ public class UserService implements UserDetailsService {
         User savedUser = userRepository.save(user);
         return new UserDTO(savedUser.getUsername(), savedUser.getEmail(), savedUser.getPassword(), savedUser.getRole());
     }
+
+    public void removeUser(Long id) {
+        userRepository.deleteById(id);
+    }
 }
