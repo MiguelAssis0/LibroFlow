@@ -49,4 +49,19 @@ Role: USER,ADMIN <br/>
 Genre: ROMANCE, COMEDIA, SUSPENSE, AVENTURA, DRAMA, TERROR, FANTASIA, INFANTIL, AUTO_AJUDA, INFORMATICA
 
 
+## Licença
+
+MIT License
+
+Copyright (c) 2025 Miguel 
+
+Permissão é concedida, gratuitamente, para qualquer pessoa que obtenha uma cópia deste software e dos arquivos de documentação associados (o "Software"), para usar o Software **exclusivamente para fins educacionais e não comerciais**, incluindo o direito de usar, copiar, modificar, mesclar, publicar, distribuir e sublicenciar o Software, desde que sejam atendidas as seguintes condições:
+
+1. Este aviso de copyright e as condições de permissão devem ser incluídos em todas as cópias ou partes substanciais do Software.
+2. O uso do Software para fins comerciais ou lucrativos é estritamente proibido.
+
+O SOFTWARE É FORNECIDO "COMO ESTÁ", SEM GARANTIA DE QUALQUER TIPO, EXPRESSA OU IMPLÍCITA, INCLUINDO, MAS NÃO SE LIMITANDO A GARANTIAS DE COMERCIABILIDADE, ADEQUAÇÃO A UM PROPÓSITO ESPECÍFICO E NÃO VIOLAÇÃO. EM NENHUM CASO OS AUTORES OU TITULARES DOS DIREITOS AUTORAIS SERÃO RESPONSÁVEIS POR QUALQUER RECLAMAÇÃO, DANO OU OUTRA RESPONSABILIDADE, SEJA EM UMA AÇÃO DE CONTRATO, ATO ILÍCITO OU DE OUTRA FORMA, DECORRENTE DE, FORA DE OU EM CONEXÃO COM O SOFTWARE OU O USO OU OUTRAS NEGOCIAÇÕES NO SOFTWARE.
+
+
+
 
