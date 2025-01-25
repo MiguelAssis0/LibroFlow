@@ -13,9 +13,9 @@ import com.LibroFlow.demo.repository.BooksRepository;
 import com.LibroFlow.demo.repository.BorrowBooksRepository;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class BorrowBooksService {
@@ -41,16 +41,16 @@ public class BorrowBooksService {
         return new BorrowBooksDTO(borrowBooks);
     }
 
-    public Page<BorrowBooksProjectionDTO> getAllBorrowedBooks(Pageable pageable) {
-        Page<BorrowBooksProjection> borrowBooks = borrowBooksRepository.findAllBorrowedBooks(pageable);
+    public List<BorrowBooksProjectionDTO> getAllBorrowedBooks() {
+        List<BorrowBooksProjection> borrowBooks = borrowBooksRepository.findAllBorrowedBooks();
         if(borrowBooks.isEmpty()) throw new EventNotFoundException("Nenhum empréstimo encontrado");
-        return borrowBooks.map(BorrowBooksProjectionDTO::new);
+        return borrowBooks.stream().map(BorrowBooksProjectionDTO::new).toList();
     }
 
-    public Page<BorrowBooksProjectionDTO> getAllReturnedBooks(Pageable pageable) {
-        Page<BorrowBooksProjection> returnedBooks = borrowBooksRepository.findAllReturnedBooks(pageable);
+    public List<BorrowBooksProjectionDTO> getAllReturnedBooks() {
+        List<BorrowBooksProjection> returnedBooks = borrowBooksRepository.findAllReturnedBooks();
         if(returnedBooks.isEmpty()) throw new EventNotFoundException("Não há empréstimos retornados");
-        return returnedBooks.map(BorrowBooksProjectionDTO::new);
+        return returnedBooks.stream().map(BorrowBooksProjectionDTO::new).toList();
     }
 
     public void returnBook(ReturnBookDTO dto){

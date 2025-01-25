@@ -1,5 +1,6 @@
 package com.LibroFlow.demo.dtos;
 
+import com.LibroFlow.demo.entities.Books;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +33,16 @@ public class BooksDTO {
         this.description = description;
         this.quantity = quantity;
         this.available = available;
+    }
+
+    public BooksDTO(Books books) {
+        this.id = books.getId();
+        this.title = books.getTitle();
+        this.author = books.getAuthor();
+        this.genre = books.getGenre();
+        this.description = books.getDescription();
+        this.quantity = books.getQuantity();
+        this.available = books.getAvailable();
     }
 
     public Long getId() { return id; }

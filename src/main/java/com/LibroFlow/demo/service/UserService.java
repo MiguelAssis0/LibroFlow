@@ -1,13 +1,12 @@
 package com.LibroFlow.demo.service;
 
-import com.LibroFlow.demo.dtos.RegisterDTO;
+import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.enums.UserRole;
 import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
+import com.LibroFlow.demo.infra.security.EncryptPassword;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,36 +20,31 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
-
-
-    public Page<RegisterDTO> getAllUsers(Pageable pageable){
-        Page<User> users = userRepository.findAll(pageable);
+    public List<UserDTO> getAllUsers(){
+        List<User> users = userRepository.findAll();
         if(users.isEmpty()) throw new EventNotFoundException("Usuários não encontrados");
-        return users.map(user -> new RegisterDTO(
-                user.getUsername(),
-                user.getEmail(),
-                null,
-                user.getRole()
-        ));
+        return users.stream().map(UserDTO::new).toList();
     }
 
-    public Page<RegisterDTO> getByRole(UserRole role, Pageable pageable){
-        Page<User> users = userRepository.findByRole(role, pageable);
-        return users.map(user -> new RegisterDTO(
-                user.getUsername(),
-                user.getEmail(),
-                null,
-                user.getRole()
-        ));
+    public List<UserDTO> getByRole(UserRole role){
+        List<User> users = userRepository.findByRole(role);
+        return users.stream().map(UserDTO::new).toList();
     }
 
-    public RegisterDTO getUserByName(String username){
+    public UserDTO getUserByName(String username){
         User user = userRepository.findByUsername(username);
-        return new RegisterDTO(user.getUsername(), user.getEmail(), user.getPassword());
+        return new UserDTO(user.getUsername(), user.getEmail(), user.getPassword());
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username);
+    }
+
+    public UserDTO createUser(UserDTO userDTO) {
+        User user = new User(userDTO.getUsername(), userDTO.getEmail(), EncryptPassword.encryptPassword(userDTO.getPassword()) , userDTO.getRole());
+        User savedUser = userRepository.save(user);
+        return new UserDTO(savedUser.getUsername(), savedUser.getEmail(), savedUser.getPassword(), savedUser.getRole());
     }
 }

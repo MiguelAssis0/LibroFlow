@@ -1,4 +1,4 @@
-package com.LibroFlow.demo.infra;
+package com.LibroFlow.demo.infra.exceptions;
 
 import org.springframework.http.HttpStatus;
 

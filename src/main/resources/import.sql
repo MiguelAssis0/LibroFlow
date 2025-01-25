@@ -2,10 +2,10 @@ SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 SET COLLATION_CONNECTION = 'utf8mb4_general_ci';
 
-INSERT INTO ADMIN (username, email, password) VALUES ('admin', 'admin@admin.com', '12345');
-INSERT INTO USERS (username, email, password) VALUES ('user', 'user@user.com', '12345');
-INSERT INTO USERS (username, email, password) VALUES ('user2', 'user2@user.com', '12345');
-INSERT INTO USERS (username, email, password) VALUES ('user3', 'user3@user.com', '12345');
+INSERT INTO USERS (username, email, password, role) VALUES ('admin', 'admin@admin.com', '$2a$10$S6G8Qx6ZgdWhw8nRCr7fJur72QESzJvh8QFUxx48YP7N.UZrPotRW', 'ADMIN');
+
+INSERT INTO USERS (username, email, password, role) VALUES ('user', 'user@user.com', '$2a$10$S6G8Qx6ZgdWhw8nRCr7fJur72QESzJvh8QFUxx48YP7N.UZrPotRW', 'USER');
+
 
 -- Romance
 INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUES ('Orgulho e Preconceito', 'Jane Austen', 'ROMANCE', 'Um romance clássico que explora questões de classe, casamento e moralidade.', 10, true);

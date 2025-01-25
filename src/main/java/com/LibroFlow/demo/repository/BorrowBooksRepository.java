@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> {
     @Query(nativeQuery = true, value = """
     SELECT
@@ -24,7 +26,7 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
     WHERE
         bb.is_returned = false;
 """)
-    Page<BorrowBooksProjection> findAllBorrowedBooks(Pageable pageable);
+    List<BorrowBooksProjection> findAllBorrowedBooks();
 
     @Query(nativeQuery = true, value = """
     SELECT
@@ -53,5 +55,5 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
     WHERE
         bb.is_returned = true;
 """)
-    Page<BorrowBooksProjection> findAllReturnedBooks(Pageable pageable);
+    List<BorrowBooksProjection> findAllReturnedBooks();
 }

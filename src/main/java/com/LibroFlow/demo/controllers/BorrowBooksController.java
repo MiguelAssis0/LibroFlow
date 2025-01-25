@@ -4,18 +4,18 @@ import com.LibroFlow.demo.dtos.BorrowBooksDTO;
 import com.LibroFlow.demo.dtos.BorrowBooksProjectionDTO;
 import com.LibroFlow.demo.dtos.ReturnBookDTO;
 import com.LibroFlow.demo.service.BorrowBooksService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/borrowbooks")
+@SecurityRequirement(name = "bearer-key")
 public class BorrowBooksController {
     @Autowired
     private BorrowBooksService borrowBooksService;
@@ -28,14 +28,14 @@ public class BorrowBooksController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<BorrowBooksProjectionDTO>> getBorrowedBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        Page<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllBorrowedBooks(pageable);
+    public ResponseEntity<List<BorrowBooksProjectionDTO>> getBorrowedBooks() {
+        List<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllBorrowedBooks();
         return ResponseEntity.ok(borrowedBooks);
     }
 
     @GetMapping("/return")
-    public ResponseEntity<Page<BorrowBooksProjectionDTO>> getReturnedBooks(@PageableDefault(page = 0, size = 10) Pageable pageable) {
-        Page<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllReturnedBooks(pageable);
+    public ResponseEntity<List<BorrowBooksProjectionDTO>> getReturnedBooks() {
+        List<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllReturnedBooks();
         return ResponseEntity.ok(borrowedBooks);
     }
 

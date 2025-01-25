@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -21,10 +22,10 @@ public class BookService {
         bookRepository.save(book);
     }
 
-    public Page<BooksDTO> findAllBooks(Pageable pageable){
-        Page<Books> books = bookRepository.findAll(pageable);
+    public List<BooksDTO> findAllBooks() {
+        List<Books> books = bookRepository.findAll();
         if(books.isEmpty()) throw new EventNotFoundException("Nenhum livro encontrado");
-        return books.map(book -> new BooksDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable()));
+        return books.stream().map(BooksDTO::new).toList();
     }
 
     public BooksDTO findByTitle(String title){

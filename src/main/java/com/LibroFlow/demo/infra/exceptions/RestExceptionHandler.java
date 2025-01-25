@@ -1,8 +1,5 @@
-package com.LibroFlow.demo.infra;
+package com.LibroFlow.demo.infra.exceptions;
 
-import com.LibroFlow.demo.infra.exceptions.EventBadRequest;
-import com.LibroFlow.demo.infra.exceptions.EventFullException;
-import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
