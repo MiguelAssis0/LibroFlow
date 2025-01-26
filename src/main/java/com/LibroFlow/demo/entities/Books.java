@@ -20,7 +20,7 @@ public class Books {
     private Integer quantity;
     private Boolean available;
 
-    public Books(){}
+    public Books(String title, String autor, Genre aventura, String descricao, int i, boolean b){}
 
     public Books(BooksDTO dto) {
         setTitle(dto.getTitle());
