@@ -1,6 +1,7 @@
 package com.LibroFlow.demo.repository;
 
 import com.LibroFlow.demo.entities.BorrowBooks;
+import com.LibroFlow.demo.entities.BorrowBooksPK;
 import com.LibroFlow.demo.projections.BorrowBooksProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,4 +57,5 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
         bb.is_returned = true;
 """)
     List<BorrowBooksProjection> findAllReturnedBooks();
+    BorrowBooks findById(BorrowBooksPK borrowBooksPK);
 }

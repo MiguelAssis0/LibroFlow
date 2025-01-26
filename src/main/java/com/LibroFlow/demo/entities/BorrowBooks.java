@@ -17,7 +17,7 @@ public class BorrowBooks {
     private LocalDate returnDate;
     private Boolean isReturned;
 
-    public BorrowBooks() {}
+    public BorrowBooks(BorrowBooksPK borrowBooksPK, LocalDate borrowDate, LocalDate now, User user, Books book) {}
 
     public BorrowBooks(BorrowBooksDTO borrowBooksDTO, User user, Books books) {
         this.id = new BorrowBooksPK(user, books);

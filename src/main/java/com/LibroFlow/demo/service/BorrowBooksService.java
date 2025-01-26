@@ -12,6 +12,7 @@ import com.LibroFlow.demo.projections.BorrowBooksProjection;
 import com.LibroFlow.demo.repository.BooksRepository;
 import com.LibroFlow.demo.repository.BorrowBooksRepository;
 import com.LibroFlow.demo.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,18 +28,21 @@ public class BorrowBooksService {
     private BooksRepository booksRepository;
 
     public BorrowBooksDTO createBorrowedBooks(BorrowBooksDTO borrowBooksDTO) {
-        User user = new User();
-        user.setId(borrowBooksDTO.getUserId());
-        if(user == null) throw new RuntimeException("Usuário não encontrado");
-        Books book = booksRepository.findById(borrowBooksDTO.getBookId()).orElseThrow(RuntimeException::new);
-        if(book.getQuantity() < 1) throw new EventFullException("Livro indisponivel");
-        book.setQuantity(book.getQuantity() - 1);
 
+        User user = userRepository.findById(borrowBooksDTO.getUserId())
+                .orElseThrow(() -> new EventNotFoundException("Usuário não encontrado"));
+
+        Books book = booksRepository.findById(borrowBooksDTO.getBookId())
+                .orElseThrow(() -> new EventNotFoundException("Livro não encontrado"));
+
+        if (book.getQuantity() < 1) throw new EventFullException("Livro indisponivel");
+        book.setQuantity(book.getQuantity() - 1);
         booksRepository.save(book);
+
         BorrowBooks borrowBooks = new BorrowBooks(borrowBooksDTO, user, book);
         borrowBooksRepository.save(borrowBooks);
-
         return new BorrowBooksDTO(borrowBooks);
+
     }
 
     public List<BorrowBooksProjectionDTO> getAllBorrowedBooks() {

@@ -13,7 +13,7 @@ public class BorrowBooksPK {
     @JoinColumn(name = "book_id")
     private Books book;
 
-    public BorrowBooksPK() {}
+    public BorrowBooksPK(long l, long l1) {}
 
     public BorrowBooksPK(User user, Books book) {
         this.user = user;

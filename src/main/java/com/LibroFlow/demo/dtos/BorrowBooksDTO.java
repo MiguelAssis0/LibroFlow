@@ -14,7 +14,7 @@ public class BorrowBooksDTO {
     @NotNull
     private Boolean isReturned;
 
-    public BorrowBooksDTO() {}
+    public BorrowBooksDTO(Long id, Long bookId, LocalDate now, LocalDate localDate) {}
 
     public BorrowBooksDTO(BorrowBooks borrowBooks) {
         this.userId = borrowBooks.getId().getUser().getId();
