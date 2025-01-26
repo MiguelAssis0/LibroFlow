@@ -35,6 +35,15 @@ public class BooksDTO {
         this.available = available;
     }
 
+    public BooksDTO(String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.description = description;
+        this.quantity = quantity;
+        this.available = available;
+    }
+
     public BooksDTO(Books books) {
         this.id = books.getId();
         this.title = books.getTitle();

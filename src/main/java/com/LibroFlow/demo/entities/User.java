@@ -1,5 +1,6 @@
 package com.LibroFlow.demo.entities;
 
+import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.enums.UserRole;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -24,11 +25,11 @@ public class User implements UserDetails{
 
     public User() {}
 
-    public User(String username, String email, String password, UserRole role) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.role = role;
+    public User(UserDTO data) {
+        this.username = data.getUsername();
+        this.email = data.getEmail();
+        this.password = data.getPassword();
+        this.role = data.getRole();
     }
 
     public User(Long id, String username, String email, String password, UserRole role) {

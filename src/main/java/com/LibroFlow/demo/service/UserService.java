@@ -42,8 +42,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public UserDTO createUser(UserDTO userDTO) {
-        User user = new User(userDTO.getUsername(), userDTO.getEmail(), EncryptPassword.encryptPassword(userDTO.getPassword()) , userDTO.getRole());
+    public UserDTO createUser(UserDTO data) {
+        data.setPassword(EncryptPassword.encryptPassword(data.getPassword()));
+        User user = new User(data);
         User savedUser = userRepository.save(user);
         return new UserDTO(savedUser.getUsername(), savedUser.getEmail(), savedUser.getPassword(), savedUser.getRole());
     }
