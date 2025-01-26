@@ -3,6 +3,7 @@ package com.LibroFlow.demo.service;
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.enums.UserRole;
+import com.LibroFlow.demo.infra.exceptions.EventIllegalArgumentException;
 import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.infra.security.EncryptPassword;
 import com.LibroFlow.demo.repository.UserRepository;
@@ -45,8 +46,11 @@ public class UserService implements UserDetailsService {
     public UserDTO createUser(UserDTO data) {
         data.setPassword(EncryptPassword.encryptPassword(data.getPassword()));
         User user = new User(data);
-        User savedUser = userRepository.save(user);
-        return new UserDTO(savedUser.getUsername(), savedUser.getEmail(), savedUser.getPassword(), savedUser.getRole());
+
+        if(userRepository.findByEmail(user.getEmail()) != null) throw new EventIllegalArgumentException("Email ja cadastrado");
+        if(userRepository.findByUsername(user.getUsername()) != null) throw new EventIllegalArgumentException("Username ja cadastrado");
+        userRepository.save(user);
+        return new UserDTO(user);
     }
 
     public void removeUser(Long id) {

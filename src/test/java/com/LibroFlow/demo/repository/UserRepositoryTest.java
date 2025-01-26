@@ -67,6 +67,16 @@ class UserRepositoryTest {
         });
     }
 
+    @Test
+    @Transactional
+    @DisplayName("Deve retornar o email de um usuário")
+    void getByEmailSuccess() {
+        UserDTO user = new UserDTO("username", "password", "email@email.com", UserRole.USER);
+        User createdUser = createUser(user);
+        String email = userRepository.findByEmail(user.getEmail()).getEmail();
+        assertEquals(user.getEmail(), email);
+    }
+
 
     private User createUser(UserDTO data) {
         User user = new User(data);
