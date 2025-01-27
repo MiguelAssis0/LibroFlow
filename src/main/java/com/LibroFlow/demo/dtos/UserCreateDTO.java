@@ -17,17 +17,6 @@ public class UserCreateDTO {
     private UserRole role;
 
     public UserCreateDTO() {}
-    public UserCreateDTO(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public UserCreateDTO(String username, String email, UserRole role) {
-        this.username = username;
-        this.email = email;
-        this.role = role;
-    }
 
     public UserCreateDTO(String username, String email, String password, UserRole role) {
         this.username = username;

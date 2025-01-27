@@ -19,7 +19,6 @@ public class BorrowBook {
 
     public BorrowBook() {}
 
-    public BorrowBook(BorrowBookPK borrowBookPK, LocalDate borrowDate, LocalDate now, User user, Book book) {}
 
     public BorrowBook(BorrowBookDTO borrowBookDTO, User user, Book book) {
         this.id = new BorrowBookPK(user, book);

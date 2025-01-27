@@ -2,6 +2,7 @@ package com.LibroFlow.demo.dtos;
 
 import com.LibroFlow.demo.entities.BorrowBook;
 import com.LibroFlow.demo.projections.BorrowBookProjection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -12,7 +13,8 @@ public class BorrowBookDTO {
     @NotNull
     private LocalDate returnDate;
     @NotNull
-    private Boolean isReturned;
+    @JsonIgnore
+    private Boolean isReturned = false;
 
     public BorrowBookDTO() {}
 
@@ -25,11 +27,10 @@ public class BorrowBookDTO {
         this.isReturned = borrowBook.getIsReturned();
     }
 
-    public BorrowBookDTO(Long userId, Long bookId, LocalDate returnDate, Boolean isReturned) {
+    public BorrowBookDTO(Long userId, Long bookId, LocalDate returnDate) {
         this.userId = userId;
         this.bookId = bookId;
         this.returnDate = returnDate;
-        this.isReturned = isReturned;
     }
 
     public BorrowBookDTO(Long userId, Long bookId) {
@@ -37,10 +38,6 @@ public class BorrowBookDTO {
         this.bookId = bookId;
     }
 
-    public BorrowBookDTO(BorrowBookProjection borrowedBook) {
-    }
-
-    // Getters and Setters
     public Long getUserId() {
         return userId;
     }

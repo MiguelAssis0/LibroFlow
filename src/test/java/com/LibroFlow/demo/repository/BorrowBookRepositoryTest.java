@@ -45,7 +45,7 @@ class BorrowBookRepositoryTest {
     @Test
     @DisplayName("Deve encontrar empréstimo existente por usuário e livro")
     void findExistingBorrowBookSuccess() {
-        BorrowBookDTO borrowBookDTO = new BorrowBookDTO(1L, 1L, LocalDate.now().plusDays(10), false);
+        BorrowBookDTO borrowBookDTO = new BorrowBookDTO(1L, 1L, LocalDate.now().plusDays(10));
         BorrowBook borrowBook = createBorrowBook(borrowBookDTO, testUser, testBook);
 
         BorrowBook found = borrowBookRepository.findByUserAndBook(testUser.getId(), testBook.getId());

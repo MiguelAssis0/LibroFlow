@@ -38,12 +38,12 @@ public class BorrowBooksService {
                 .orElseThrow(() -> new EventNotFoundException("Livro não encontrado"));
 
         if (book.getQuantity() < 1) throw new EventFullException("Livro indisponivel");
-        book.setQuantity(book.getQuantity() - 1);
-        bookRepository.save(book);
-        cacheService.evictAllCacheValues("book");
 
         BorrowBook borrowBook = new BorrowBook(borrowBookDTO, user, book);
         borrowBookRepository.save(borrowBook);
+        book.setQuantity(book.getQuantity() - 1);
+        bookRepository.save(book);
+        cacheService.evictAllCacheValues("book");
         cacheService.evictAllCacheValues("allBorrowedBooks");
         return new BorrowBookDTO(borrowBook);
 

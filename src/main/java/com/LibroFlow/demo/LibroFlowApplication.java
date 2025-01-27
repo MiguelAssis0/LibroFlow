@@ -14,5 +14,4 @@ public class LibroFlowApplication {
 		SpringApplication.run(LibroFlowApplication.class, args);
 	}
 
-}
-;
+};
