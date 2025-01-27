@@ -26,6 +26,8 @@ public class BorrowBooksService {
     private UserRepository userRepository;
     @Autowired
     private BookRepository bookRepository;
+    @Autowired
+    private CacheService cacheService;
 
     public BorrowBookDTO createBorrowedBooks(BorrowBookDTO borrowBookDTO) {
 
@@ -38,9 +40,11 @@ public class BorrowBooksService {
         if (book.getQuantity() < 1) throw new EventFullException("Livro indisponivel");
         book.setQuantity(book.getQuantity() - 1);
         bookRepository.save(book);
+        cacheService.evictAllCacheValues("book");
 
         BorrowBook borrowBook = new BorrowBook(borrowBookDTO, user, book);
         borrowBookRepository.save(borrowBook);
+        cacheService.evictAllCacheValues("allBorrowedBooks");
         return new BorrowBookDTO(borrowBook);
 
     }
@@ -69,6 +73,8 @@ public class BorrowBooksService {
         book.setQuantity(book.getQuantity() + 1);
         borrowBook.setIsReturned(true);
         borrowBookRepository.save(borrowBook);
+        cacheService.evictAllCacheValues("allReturnedBooks");
         bookRepository.save(book);
+        cacheService.evictAllCacheValues("books");
     }
 }

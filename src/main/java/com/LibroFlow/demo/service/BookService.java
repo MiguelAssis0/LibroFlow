@@ -16,12 +16,16 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private CacheService cacheService;
+
     public void createBook(BookDTO dto){
         Book book = new Book(dto);
         bookRepository.save(book);
+        cacheService.evictAllCacheValues("books");
     }
 
-    @Cacheable(value = "books")
+    @Cacheable(value = "book")
     public List<BookDTO> findAllBooks() {
         List<Book> books = bookRepository.findAll();
         if(books.isEmpty()) throw new EventNotFoundException("Nenhum livro encontrado");
@@ -37,6 +41,7 @@ public class BookService {
     public void deleteBook(Long id){
         Book book = bookRepository.findById(id).orElseThrow(EventNotFoundException::new);
         bookRepository.delete(book);
+        cacheService.evictAllCacheValues("books");
     }
 
     public BookDTO updateBook(Long id, BookDTO dto){
@@ -49,6 +54,7 @@ public class BookService {
         if(!Objects.equals(dto.getQuantity(), book.getQuantity()) && dto.getQuantity() > 0) book.setQuantity(dto.getQuantity());
 
         bookRepository.save(book);
+        cacheService.evictAllCacheValues("books");
         return new BookDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 }

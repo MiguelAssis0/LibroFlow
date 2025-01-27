@@ -23,6 +23,9 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CacheService cacheService;
+
     @Cacheable(value = "users")
     public List<UserDTO> getAllUsers(){
         List<User> users = userRepository.findAll();
@@ -53,10 +56,12 @@ public class UserService implements UserDetailsService {
         if(userRepository.findByEmail(user.getEmail()) != null) throw new EventIllegalArgumentException("Email ja cadastrado");
         if(userRepository.findByUsername(user.getUsername()) != null) throw new EventIllegalArgumentException("Username ja cadastrado");
         userRepository.save(user);
+        cacheService.evictAllCacheValues("users");
         return new UserDTO(user);
     }
 
     public void removeUser(Long id) {
         userRepository.deleteById(id);
+        cacheService.evictAllCacheValues("users");
     }
 }
