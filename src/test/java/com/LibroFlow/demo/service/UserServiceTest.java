@@ -28,6 +28,9 @@ class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private CacheService cacheService;
+
     @InjectMocks
     private UserService userService;
 

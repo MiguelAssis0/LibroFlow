@@ -33,18 +33,20 @@ import static org.mockito.Mockito.*;
 @ActiveProfiles("test")
 class BorrowBookServiceTest {
 
-    @InjectMocks
-    private BorrowBooksService borrowBooksService;
-
-
     @Mock
-    private BorrowBookRepository borrowBookRepository;
+    private BookRepository bookRepository;
 
     @Mock
     private UserRepository userRepository;
 
     @Mock
-    private BookRepository bookRepository;
+    private BorrowBookRepository borrowBookRepository;
+
+    @Mock
+    private CacheService cacheService;
+
+    @InjectMocks
+    private BorrowBooksService borrowBooksService;
 
     @Test
     @Transactional

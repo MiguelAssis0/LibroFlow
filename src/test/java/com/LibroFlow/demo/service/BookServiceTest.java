@@ -32,7 +32,8 @@ class BookServiceTest {
     @Mock
     private BookRepository bookRepository;
 
-
+    @Mock
+    private CacheService cacheService;
 
     @Test
     @Transactional
@@ -41,7 +42,6 @@ class BookServiceTest {
         BookDTO dto = new BookDTO( "Titulo", "Autor", Genre.AVENTURA, "descricao", 10, true);
         bookService.createBook(dto);
         verify(bookRepository, times(1)).save(any(Book.class));
-
     }
 
     @Test
