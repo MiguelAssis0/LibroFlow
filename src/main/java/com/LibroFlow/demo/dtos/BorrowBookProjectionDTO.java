@@ -1,11 +1,11 @@
 package com.LibroFlow.demo.dtos;
 
-import com.LibroFlow.demo.projections.BorrowBooksProjection;
+import com.LibroFlow.demo.projections.BorrowBookProjection;
 
 import java.time.LocalDate;
 
 
-public class BorrowBooksProjectionDTO {
+public class BorrowBookProjectionDTO {
     private String userName;
     private String bookTitle;
     private LocalDate borrowDate;
@@ -13,7 +13,7 @@ public class BorrowBooksProjectionDTO {
     private LocalDate returnDate;
     private Boolean isReturned;
 
-    public BorrowBooksProjectionDTO(BorrowBooksProjection borrowedBook) {
+    public BorrowBookProjectionDTO(BorrowBookProjection borrowedBook) {
         this.userName = borrowedBook.getUserName();
         this.bookTitle = borrowedBook.getBookTitle();
         this.borrowDate = borrowedBook.getBorrowDate();

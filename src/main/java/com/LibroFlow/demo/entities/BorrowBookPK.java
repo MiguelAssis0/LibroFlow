@@ -5,17 +5,19 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Embeddable
-public class BorrowBooksPK {
+public class BorrowBookPK {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
     @JoinColumn(name = "book_id")
-    private Books book;
+    private Book book;
 
-    public BorrowBooksPK(long l, long l1) {}
+    public BorrowBookPK() {}
 
-    public BorrowBooksPK(User user, Books book) {
+    public BorrowBookPK(long l, long l1) {}
+
+    public BorrowBookPK(User user, Book book) {
         this.user = user;
         this.book = book;
     }
@@ -28,11 +30,11 @@ public class BorrowBooksPK {
         this.user = user;
     }
 
-    public Books getBook() {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Books book) {
+    public void setBook(Book book) {
         this.book = book;
     }
 }

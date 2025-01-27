@@ -1,12 +1,12 @@
 package com.LibroFlow.demo.dtos;
 
-import com.LibroFlow.demo.entities.BorrowBooks;
-import com.LibroFlow.demo.projections.BorrowBooksProjection;
+import com.LibroFlow.demo.entities.BorrowBook;
+import com.LibroFlow.demo.projections.BorrowBookProjection;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public class BorrowBooksDTO {
+public class BorrowBookDTO {
     private Long userId;
     private Long bookId;
     @NotNull
@@ -14,28 +14,28 @@ public class BorrowBooksDTO {
     @NotNull
     private Boolean isReturned;
 
-    public BorrowBooksDTO(Long id, Long bookId, LocalDate now, LocalDate localDate) {}
+    public BorrowBookDTO(Long id, Long bookId, LocalDate now, LocalDate localDate) {}
 
-    public BorrowBooksDTO(BorrowBooks borrowBooks) {
-        this.userId = borrowBooks.getId().getUser().getId();
-        this.bookId = borrowBooks.getId().getBook().getId();
-        this.returnDate = borrowBooks.getReturnDate();
-        this.isReturned = borrowBooks.getIsReturned();
+    public BorrowBookDTO(BorrowBook borrowBook) {
+        this.userId = borrowBook.getId().getUser().getId();
+        this.bookId = borrowBook.getId().getBook().getId();
+        this.returnDate = borrowBook.getReturnDate();
+        this.isReturned = borrowBook.getIsReturned();
     }
 
-    public BorrowBooksDTO(Long userId, Long bookId, LocalDate returnDate, Boolean isReturned) {
+    public BorrowBookDTO(Long userId, Long bookId, LocalDate returnDate, Boolean isReturned) {
         this.userId = userId;
         this.bookId = bookId;
         this.returnDate = returnDate;
         this.isReturned = isReturned;
     }
 
-    public BorrowBooksDTO(Long userId, Long bookId) {
+    public BorrowBookDTO(Long userId, Long bookId) {
         this.userId = userId;
         this.bookId = bookId;
     }
 
-    public BorrowBooksDTO(BorrowBooksProjection borrowedBook) {
+    public BorrowBookDTO(BorrowBookProjection borrowedBook) {
     }
 
     // Getters and Setters

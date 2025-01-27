@@ -1,6 +1,6 @@
 package com.LibroFlow.demo.controllers;
 
-import com.LibroFlow.demo.dtos.UserCredentialsDTO;
+import com.LibroFlow.demo.dtos.UserCredentialDTO;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.infra.security.TokenService;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ public class UserLoginController  {
     private TokenService tokenService;
 
     @PostMapping
-    public ResponseEntity<String> userCredentials(@Valid @RequestBody UserCredentialsDTO userDTO) {
+    public ResponseEntity<String> userCredentials(@Valid @RequestBody UserCredentialDTO userDTO) {
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword());
         Authentication auth = authenticationManager.authenticate(token);

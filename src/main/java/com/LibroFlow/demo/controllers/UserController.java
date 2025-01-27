@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 @SecurityRequirement(name = "bearer-key")
 public class UserController {
     @Autowired
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable String username) {
+    public ResponseEntity<UserDTO> getUserByName(@PathVariable String username) {
         UserDTO user = userService.getUserByName(username);
         return ResponseEntity.ok(user);
     }
@@ -40,7 +40,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
         UserDTO user = userService.createUser(userDTO);
-        URI address = URI.create("/users/" + user.getEmail());
+        URI address = URI.create("/user/" + user.getEmail());
         return ResponseEntity.created(address).body(user);
     }
 

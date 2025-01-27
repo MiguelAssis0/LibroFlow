@@ -1,16 +1,14 @@
 package com.LibroFlow.demo.repository;
 
-import com.LibroFlow.demo.entities.BorrowBooks;
-import com.LibroFlow.demo.entities.BorrowBooksPK;
-import com.LibroFlow.demo.projections.BorrowBooksProjection;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.LibroFlow.demo.entities.BorrowBook;
+import com.LibroFlow.demo.entities.BorrowBookPK;
+import com.LibroFlow.demo.projections.BorrowBookProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> {
+public interface BorrowBookRepository extends JpaRepository<BorrowBook, Long> {
     @Query(nativeQuery = true, value = """
     SELECT
         u.username AS user_name,
@@ -23,11 +21,11 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
     JOIN
         users u ON bb.user_id = u.id
     JOIN
-        books b ON bb.book_id = b.id
+        book b ON bb.book_id = b.id
     WHERE
         bb.is_returned = false;
 """)
-    List<BorrowBooksProjection> findAllBorrowedBooks();
+    List<BorrowBookProjection> findAllBorrowedBooks();
 
     @Query(nativeQuery = true, value = """
     SELECT
@@ -38,7 +36,7 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
         user_id = :userId AND
         book_id = :bookId
     """)
-    BorrowBooks findByUserAndBook(Long userId, Long bookId);
+    BorrowBook findByUserAndBook(Long userId, Long bookId);
 
     @Query(nativeQuery = true, value = """
     SELECT
@@ -52,10 +50,10 @@ public interface BorrowBooksRepository extends JpaRepository<BorrowBooks, Long> 
     JOIN
         users u ON bb.user_id = u.id
     JOIN
-        books b ON bb.book_id = b.id
+        book b ON bb.book_id = b.id
     WHERE
         bb.is_returned = true;
 """)
-    List<BorrowBooksProjection> findAllReturnedBooks();
-    BorrowBooks findById(BorrowBooksPK borrowBooksPK);
+    List<BorrowBookProjection> findAllReturnedBooks();
+    BorrowBook findById(BorrowBookPK borrowBookPK);
 }

@@ -1,13 +1,13 @@
 package com.LibroFlow.demo.entities;
 
 
-import com.LibroFlow.demo.dtos.BooksDTO;
+import com.LibroFlow.demo.dtos.BookDTO;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 
 @Table(name = "books")
 @Entity
-public class Books {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,9 +21,11 @@ public class Books {
     private Integer quantity;
     private Boolean available;
 
-    public Books(String title, String autor, Genre aventura, String descricao, int i, boolean b){}
+    public Book() {}
 
-    public Books(BooksDTO dto) {
+    public Book(String title, String autor, Genre aventura, String descricao, int i, boolean b){}
+
+    public Book(BookDTO dto) {
         setTitle(dto.getTitle());
         setAuthor(dto.getAuthor());
         setGenre(dto.getGenre());

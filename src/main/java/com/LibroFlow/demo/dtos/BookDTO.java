@@ -1,6 +1,6 @@
 package com.LibroFlow.demo.dtos;
 
-import com.LibroFlow.demo.entities.Books;
+import com.LibroFlow.demo.entities.Book;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 
-public class BooksDTO {
+public class BookDTO {
     private Long id;
     @NotBlank
     private String title;
@@ -23,9 +23,9 @@ public class BooksDTO {
     @NotNull
     private Boolean available;
 
-    public BooksDTO() {}
+    public BookDTO() {}
 
-    public BooksDTO(Long id,String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
+    public BookDTO(Long id, String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -35,7 +35,7 @@ public class BooksDTO {
         this.available = available;
     }
 
-    public BooksDTO(String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
+    public BookDTO(String title, String author, Genre genre, String description, Integer quantity, Boolean available) {
         this.title = title;
         this.author = author;
         this.genre = genre;
@@ -44,14 +44,14 @@ public class BooksDTO {
         this.available = available;
     }
 
-    public BooksDTO(Books books) {
-        this.id = books.getId();
-        this.title = books.getTitle();
-        this.author = books.getAuthor();
-        this.genre = books.getGenre();
-        this.description = books.getDescription();
-        this.quantity = books.getQuantity();
-        this.available = books.getAvailable();
+    public BookDTO(Book book) {
+        this.id = book.getId();
+        this.title = book.getTitle();
+        this.author = book.getAuthor();
+        this.genre = book.getGenre();
+        this.description = book.getDescription();
+        this.quantity = book.getQuantity();
+        this.available = book.getAvailable();
     }
 
     public Long getId() { return id; }

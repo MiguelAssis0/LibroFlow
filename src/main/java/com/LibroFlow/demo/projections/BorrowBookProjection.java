@@ -2,7 +2,7 @@ package com.LibroFlow.demo.projections;
 
 import java.time.LocalDate;
 
-public interface BorrowBooksProjection {
+public interface BorrowBookProjection {
     String getUserName();
     String getBookTitle();
     LocalDate getBorrowDate();

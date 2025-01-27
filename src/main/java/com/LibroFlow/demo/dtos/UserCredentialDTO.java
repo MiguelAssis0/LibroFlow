@@ -1,12 +1,12 @@
 package com.LibroFlow.demo.dtos;
 
-public class UserCredentialsDTO {
+public class UserCredentialDTO {
     private String username;
     private String password;
 
-    public UserCredentialsDTO() {}
+    public UserCredentialDTO() {}
 
-    public UserCredentialsDTO(String username, String password) {
+    public UserCredentialDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }

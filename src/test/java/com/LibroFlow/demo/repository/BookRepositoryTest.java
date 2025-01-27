@@ -1,7 +1,7 @@
 package com.LibroFlow.demo.repository;
 
-import com.LibroFlow.demo.dtos.BooksDTO;
-import com.LibroFlow.demo.entities.Books;
+import com.LibroFlow.demo.dtos.BookDTO;
+import com.LibroFlow.demo.entities.Book;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
@@ -15,21 +15,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class BooksRepositoryTest {
+class BookRepositoryTest {
 
     @Autowired
     EntityManager entityManager;
 
     @Autowired
-    BooksRepository booksRepository;
+    BookRepository bookRepository;
 
     @Test
     @Transactional
     @DisplayName("Deve encontrar um livro por seu titulo")
     void findByTitleSuccess() {
-        BooksDTO dto = new BooksDTO( "Titulo", "Autor", Genre.AVENTURA, "Descricao", 10, true);
-        Books book = createUser(dto);
-        Books found = booksRepository.findByTitle(dto.getTitle());
+        BookDTO dto = new BookDTO( "Titulo", "Autor", Genre.AVENTURA, "Descricao", 10, true);
+        Book book = createUser(dto);
+        Book found = bookRepository.findByTitle(dto.getTitle());
         assertEquals(book.getId(), found.getId());
     }
 
@@ -37,14 +37,14 @@ class BooksRepositoryTest {
     @Transactional
     @DisplayName("Não deve encontrar um livro por seu titulo")
     void dontFindByTitle() {
-        BooksDTO dto = new BooksDTO( "Titulo", "Autor", Genre.AVENTURA, "Descricao", 10, true);
+        BookDTO dto = new BookDTO( "Titulo", "Autor", Genre.AVENTURA, "Descricao", 10, true);
         createUser(dto);
-        Books found = booksRepository.findByTitle("Titulo errado");
+        Book found = bookRepository.findByTitle("Titulo errado");
         assertNull(found);
     }
 
-    private Books createUser(BooksDTO dto) {
-        Books book = new Books(dto);
+    private Book createUser(BookDTO dto) {
+        Book book = new Book(dto);
         entityManager.persist(book);
         return book;
     }

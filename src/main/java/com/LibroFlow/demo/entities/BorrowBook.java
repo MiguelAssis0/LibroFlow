@@ -1,6 +1,6 @@
 package com.LibroFlow.demo.entities;
 
-import com.LibroFlow.demo.dtos.BorrowBooksDTO;
+import com.LibroFlow.demo.dtos.BorrowBookDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,28 +8,30 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "borrowed_books")
-public class BorrowBooks {
+public class BorrowBook {
     @EmbeddedId
-    private BorrowBooksPK id;
+    private BorrowBookPK id;
     @Column(name = "borrow_date", nullable = false, columnDefinition = "DATE DEFAULT CURRENT_DATE")
     private LocalDate borrowDate = LocalDate.now();
     @Column(name = "return_date", nullable = false)
     private LocalDate returnDate;
     private Boolean isReturned;
 
-    public BorrowBooks(BorrowBooksPK borrowBooksPK, LocalDate borrowDate, LocalDate now, User user, Books book) {}
+    public BorrowBook() {}
 
-    public BorrowBooks(BorrowBooksDTO borrowBooksDTO, User user, Books books) {
-        this.id = new BorrowBooksPK(user, books);
-        this.returnDate = borrowBooksDTO.getReturnDate();
-        this.isReturned = borrowBooksDTO.getIsReturned();
+    public BorrowBook(BorrowBookPK borrowBookPK, LocalDate borrowDate, LocalDate now, User user, Book book) {}
+
+    public BorrowBook(BorrowBookDTO borrowBookDTO, User user, Book book) {
+        this.id = new BorrowBookPK(user, book);
+        this.returnDate = borrowBookDTO.getReturnDate();
+        this.isReturned = borrowBookDTO.getIsReturned();
     }
 
-    public BorrowBooksPK getId() {
+    public BorrowBookPK getId() {
         return id;
     }
 
-    public void setId(BorrowBooksPK id) {
+    public void setId(BorrowBookPK id) {
         this.id = id;
     }
 
@@ -60,7 +62,7 @@ public class BorrowBooks {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        BorrowBooks that = (BorrowBooks) o;
+        BorrowBook that = (BorrowBook) o;
         return Objects.equals(id, that.id) && Objects.equals(borrowDate, that.borrowDate) && Objects.equals(returnDate, that.returnDate);
     }
 

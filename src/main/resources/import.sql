@@ -1,6 +1,5 @@
-SET NAMES utf8mb4;
-SET CHARACTER SET utf8mb4;
-SET COLLATION_CONNECTION = 'utf8mb4_general_ci';
+
+
 
 INSERT INTO USERS (username, email, password, role) VALUES ('admin', 'admin@admin.com', '$2a$10$S6G8Qx6ZgdWhw8nRCr7fJur72QESzJvh8QFUxx48YP7N.UZrPotRW', 'ADMIN');
 
@@ -41,9 +40,6 @@ INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUE
 INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUES ('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'FANTASIA', 'O primeiro livro da série Harry Potter, sobre um jovem bruxo que frequenta a Escola de Magia e Bruxaria de Hogwarts.', 50, true);
 
 INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUES ('O Nome do Vento', 'Patrick Rothfuss', 'FANTASIA', 'O primeiro livro da crônica O Chroniqueiro do Rei, seguindo a história de um jovem talentoso chamado Kvothe.', 25, true);
-
--- Infantil
-INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUES ('Harry Potter e a Pedra Filosofal', 'J.K. Rowling', 'INFANTIL', 'O primeiro livro da série Harry Potter, adequado para crianças e leitores mais jovens.', 30, true);
 
 INSERT INTO BOOKS (title, author, genre, description, quantity, available) VALUES ('Onde Vivem os Monstros', 'Maurice Sendak', 'INFANTIL', 'Um amado livro infantil sobre um jovem garoto que navega até uma ilha cheia de criaturas selvagens.', 40, true);
 

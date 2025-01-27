@@ -29,11 +29,12 @@ public class Security {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         //BOOKS
-                        .requestMatchers(HttpMethod.POST, "/books").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/books/**").hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.GET, "/books/{title}").hasAnyAuthority("ADMIN", "USER")
-                        .requestMatchers(HttpMethod.DELETE, "/books/{id}").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/books/{id}").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/book").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/book").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/book/**").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.GET, "/book/{title}").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers(HttpMethod.DELETE, "/book/{id}").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/book/{id}").hasAuthority("ADMIN")
 
                         //USER
                         .requestMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
@@ -45,10 +46,10 @@ public class Security {
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
 
                         //BORROW
-                        .requestMatchers(HttpMethod.POST, "/borrowbooks").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/borrowbooks").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/borrowbooks/return").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/borrowbooks/return").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/borrowbook").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/borrowbook").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/borrowbook/return").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/borrowbook/return").hasAuthority("ADMIN")
 
                         //SWAGGER
                         .requestMatchers("/v3/api-docs/**","/swagger-ui.html", "/swagger-ui/**").permitAll()

@@ -1,7 +1,7 @@
 package com.LibroFlow.demo.controllers;
 
-import com.LibroFlow.demo.dtos.BorrowBooksDTO;
-import com.LibroFlow.demo.dtos.BorrowBooksProjectionDTO;
+import com.LibroFlow.demo.dtos.BorrowBookDTO;
+import com.LibroFlow.demo.dtos.BorrowBookProjectionDTO;
 import com.LibroFlow.demo.dtos.ReturnBookDTO;
 import com.LibroFlow.demo.service.BorrowBooksService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,28 +14,28 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/borrowbooks")
+@RequestMapping("/borrowbook")
 @SecurityRequirement(name = "bearer-key")
-public class BorrowBooksController {
+public class BorrowBookController {
     @Autowired
     private BorrowBooksService borrowBooksService;
 
     @PostMapping
-    public ResponseEntity<BorrowBooksDTO> createBorrowedBooks(@Valid @RequestBody BorrowBooksDTO borrowBooksDTO) {
-        BorrowBooksDTO borrowedBooks = borrowBooksService.createBorrowedBooks(borrowBooksDTO);
-        URI address = URI.create("/borrowbooks/" + borrowedBooks);
+    public ResponseEntity<BorrowBookDTO> createBorrowedBooks(@Valid @RequestBody BorrowBookDTO borrowBookDTO) {
+        BorrowBookDTO borrowedBooks = borrowBooksService.createBorrowedBooks(borrowBookDTO);
+        URI address = URI.create("/borrowbook/" + borrowedBooks);
         return ResponseEntity.created(address).body(borrowedBooks);
     }
 
     @GetMapping
-    public ResponseEntity<List<BorrowBooksProjectionDTO>> getBorrowedBooks() {
-        List<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllBorrowedBooks();
+    public ResponseEntity<List<BorrowBookProjectionDTO>> getBorrowBook() {
+        List<BorrowBookProjectionDTO> borrowedBooks = borrowBooksService.getAllBorrowedBooks();
         return ResponseEntity.ok(borrowedBooks);
     }
 
     @GetMapping("/return")
-    public ResponseEntity<List<BorrowBooksProjectionDTO>> getReturnedBooks() {
-        List<BorrowBooksProjectionDTO> borrowedBooks = borrowBooksService.getAllReturnedBooks();
+    public ResponseEntity<List<BorrowBookProjectionDTO>> getReturnBook() {
+        List<BorrowBookProjectionDTO> borrowedBooks = borrowBooksService.getAllReturnedBooks();
         return ResponseEntity.ok(borrowedBooks);
     }
 
