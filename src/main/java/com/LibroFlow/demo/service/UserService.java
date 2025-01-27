@@ -60,6 +60,7 @@ public class UserService implements UserDetailsService {
         return new UserDTO(user);
     }
 
+
     public void removeUser(Long id) {
         userRepository.deleteById(id);
         cacheService.evictAllCacheValues("users");

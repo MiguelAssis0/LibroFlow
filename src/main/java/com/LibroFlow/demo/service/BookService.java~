@@ -22,7 +22,6 @@ public class BookService {
     public void createBook(BookDTO dto){
         Book book = new Book(dto);
         bookRepository.save(book);
-        cacheService.evictAllCacheValues("book");
     }
 
     @Cacheable(value = "book")
@@ -41,7 +40,6 @@ public class BookService {
     public void deleteBook(Long id){
         Book book = bookRepository.findById(id).orElseThrow(EventNotFoundException::new);
         bookRepository.delete(book);
-        cacheService.evictAllCacheValues("book");
     }
 
     public BookDTO updateBook(Long id, BookDTO dto){
@@ -54,7 +52,6 @@ public class BookService {
         if(!Objects.equals(dto.getQuantity(), book.getQuantity()) && dto.getQuantity() > 0) book.setQuantity(dto.getQuantity());
 
         bookRepository.save(book);
-        cacheService.evictAllCacheValues("book");
         return new BookDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 }

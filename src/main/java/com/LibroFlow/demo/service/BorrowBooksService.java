@@ -73,8 +73,8 @@ public class BorrowBooksService {
         book.setQuantity(book.getQuantity() + 1);
         borrowBook.setIsReturned(true);
         borrowBookRepository.save(borrowBook);
-        cacheService.evictAllCacheValues("allReturnedBooks");
+        cacheService.evictAllCacheValues("allBorrowedBooks");
         bookRepository.save(book);
-        cacheService.evictAllCacheValues("books");
+        cacheService.evictAllCacheValues("book");
     }
 }
