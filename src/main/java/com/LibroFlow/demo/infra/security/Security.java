@@ -51,9 +51,6 @@ public class Security {
                         .requestMatchers(HttpMethod.POST, "/borrowbook/return").hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/borrowbook/return").hasAuthority("ADMIN")
 
-                        //CACHE
-                        .requestMatchers(HttpMethod.POST, "/cache").hasAuthority("ADMIN")
-
                         //SWAGGER
                         .requestMatchers("/v3/api-docs/**","/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
