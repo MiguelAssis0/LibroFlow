@@ -1,5 +1,6 @@
 package com.LibroFlow.demo.controllers;
 
+import com.LibroFlow.demo.dtos.UserCreateDTO;
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.enums.UserRole;
 import com.LibroFlow.demo.service.UserService;
@@ -38,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> createUser(@Valid @RequestBody UserCreateDTO userDTO) {
         UserDTO user = userService.createUser(userDTO);
         URI address = URI.create("/user/" + user.getEmail());
         return ResponseEntity.created(address).body(user);

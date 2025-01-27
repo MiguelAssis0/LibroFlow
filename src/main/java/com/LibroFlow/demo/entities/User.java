@@ -1,5 +1,6 @@
 package com.LibroFlow.demo.entities;
 
+import com.LibroFlow.demo.dtos.UserCreateDTO;
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.enums.UserRole;
 import jakarta.persistence.*;
@@ -28,6 +29,13 @@ public class User implements UserDetails{
     public User() {}
 
     public User(UserDTO data) {
+        this.username = data.getUsername();
+        this.email = data.getEmail();
+        this.password = data.getPassword();
+        this.role = data.getRole();
+    }
+
+    public User(UserCreateDTO data) {
         this.username = data.getUsername();
         this.email = data.getEmail();
         this.password = data.getPassword();

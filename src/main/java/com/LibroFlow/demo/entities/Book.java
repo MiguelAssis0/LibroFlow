@@ -5,7 +5,7 @@ import com.LibroFlow.demo.dtos.BookDTO;
 import com.LibroFlow.demo.enums.Genre;
 import jakarta.persistence.*;
 
-@Table(name = "books")
+@Table(name = "book")
 @Entity
 public class Book {
     @Id

@@ -14,6 +14,8 @@ public class BorrowBookDTO {
     @NotNull
     private Boolean isReturned;
 
+    public BorrowBookDTO() {}
+
     public BorrowBookDTO(Long id, Long bookId, LocalDate now, LocalDate localDate) {}
 
     public BorrowBookDTO(BorrowBook borrowBook) {

@@ -6,27 +6,37 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-public class UserDTO {
+public class UserCreateDTO {
     @NotBlank
     private String username;
     @NotBlank
     @Email
     private String email;
     @NotBlank
-    @JsonIgnore
     private String password;
     private UserRole role;
 
-    public UserDTO() {}
+    public UserCreateDTO() {}
+    public UserCreateDTO(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 
-    public UserDTO(String username, String email, String password, UserRole role) {
+    public UserCreateDTO(String username, String email, UserRole role) {
+        this.username = username;
+        this.email = email;
+        this.role = role;
+    }
+
+    public UserCreateDTO(String username, String email, String password, UserRole role) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public UserDTO(User user) {
+    public UserCreateDTO(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
         this.password = user.getPassword();

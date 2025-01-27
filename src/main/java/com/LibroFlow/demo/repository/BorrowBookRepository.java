@@ -17,7 +17,7 @@ public interface BorrowBookRepository extends JpaRepository<BorrowBook, Long> {
         bb.return_date,
         bb.is_returned
     FROM
-        borrowed_books bb
+        borrow_book bb
     JOIN
         users u ON bb.user_id = u.id
     JOIN
@@ -31,7 +31,7 @@ public interface BorrowBookRepository extends JpaRepository<BorrowBook, Long> {
     SELECT
         *
     FROM
-        borrowed_books
+        borrow_book
     WHERE
         user_id = :userId AND
         book_id = :bookId
@@ -46,7 +46,7 @@ public interface BorrowBookRepository extends JpaRepository<BorrowBook, Long> {
         bb.return_date,
         bb.is_returned
     FROM
-        borrowed_books bb
+        borrow_book bb
     JOIN
         users u ON bb.user_id = u.id
     JOIN

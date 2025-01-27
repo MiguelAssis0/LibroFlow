@@ -37,10 +37,10 @@ public class Security {
                         .requestMatchers(HttpMethod.PUT, "/book/{id}").hasAuthority("ADMIN")
 
                         //USER
-                        .requestMatchers(HttpMethod.GET, "/users").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/users/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/users/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/users/register").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/user").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/user/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/user/**").hasAuthority("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/user/register").hasAuthority("ADMIN")
 
                        //LOGIN
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()

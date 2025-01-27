@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "borrowed_books")
+@Table(name = "borrow_book")
 public class BorrowBook {
     @EmbeddedId
     private BorrowBookPK id;

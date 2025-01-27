@@ -1,5 +1,6 @@
 package com.LibroFlow.demo.service;
 
+import com.LibroFlow.demo.dtos.UserCreateDTO;
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.enums.UserRole;
@@ -76,7 +77,7 @@ class UserServiceTest {
     @Transactional
     @DisplayName("Deve criar um usuário")
     void createUser() {
-        UserDTO userDTO = new UserDTO("usuario01", "email@gmail.com", "12345", UserRole.USER);
+        UserCreateDTO userDTO = new UserCreateDTO("usuario01", "email@gmail.com", "12345", UserRole.USER);
         UserDTO createdUserDTO = userService.createUser(userDTO);
         assertNotNull(createdUserDTO);
         assertEquals(userDTO.getUsername(), createdUserDTO.getUsername());
@@ -87,7 +88,7 @@ class UserServiceTest {
     @Transactional
     @DisplayName("Deve retornar um erro ao tentar criar um usuário com username duplicado")
     void createUserWithDuplicateUsername() {
-        UserDTO userDTO = new UserDTO("username", "email@email.com", "12345", UserRole.USER);
+        UserCreateDTO userDTO = new UserCreateDTO("username", "email@email.com", "12345", UserRole.USER);
         when(userRepository.findByUsername(userDTO.getUsername())).thenReturn(new User(1L, "username", "email@email.com", "12345", UserRole.USER));
         assertThrows(EventIllegalArgumentException.class, () -> userService.createUser(userDTO));
     }
@@ -96,8 +97,8 @@ class UserServiceTest {
     @Transactional
     @DisplayName("Deve retornar um erro ao tentar criar um usuário com email duplicado")
     void createUserWithDuplicateEmail() {
-        UserDTO userDTO = new UserDTO("username", "email@email.com", "12345", UserRole.USER);
-        UserDTO userDTO2 = new UserDTO("username2", "email@email.com", "12345", UserRole.USER);
+        UserCreateDTO userDTO = new UserCreateDTO("username", "email@email.com", "12345", UserRole.USER);
+        UserCreateDTO userDTO2 = new UserCreateDTO("username2", "email@email.com", "12345", UserRole.USER);
         when(userRepository.findByEmail(userDTO.getEmail())).thenReturn(new User(1L, "username", "email@email.com", "12345", UserRole.USER));
         assertThrows(EventIllegalArgumentException.class, () -> userService.createUser(userDTO2));
     }
@@ -106,7 +107,7 @@ class UserServiceTest {
     @Transactional
     @DisplayName("Deve deletar um usuário")
     void removeUser() {
-        UserDTO user = new UserDTO("username", "email@email.com", "12345", UserRole.USER);
+        UserCreateDTO user = new UserCreateDTO("username", "email@email.com", "12345", UserRole.USER);
         userService.createUser(user);
         userService.removeUser(1L);
         assertFalse(userRepository.existsById(1L));

@@ -1,6 +1,5 @@
 package com.LibroFlow.demo.service;
 
-import com.LibroFlow.demo.dtos.UserCreateDTO;
 import com.LibroFlow.demo.dtos.UserDTO;
 import com.LibroFlow.demo.entities.User;
 import com.LibroFlow.demo.enums.UserRole;
@@ -44,7 +43,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
-    public UserDTO createUser(UserCreateDTO data) {
+    public UserDTO createUser(UserDTO data) {
         data.setPassword(EncryptPassword.encryptPassword(data.getPassword()));
         User user = new User(data);
 
