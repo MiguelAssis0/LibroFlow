@@ -9,6 +9,7 @@ import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.infra.security.EncryptPassword;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,6 +23,7 @@ public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    @Cacheable(value = "users")
     public List<UserDTO> getAllUsers(){
         List<User> users = userRepository.findAll();
         if(users.isEmpty()) throw new EventNotFoundException("Usuários não encontrados");

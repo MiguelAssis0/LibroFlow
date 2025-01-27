@@ -5,6 +5,7 @@ import com.LibroFlow.demo.entities.Book;
 import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class BookService {
         bookRepository.save(book);
     }
 
+    @Cacheable(value = "books")
     public List<BookDTO> findAllBooks() {
         List<Book> books = bookRepository.findAll();
         if(books.isEmpty()) throw new EventNotFoundException("Nenhum livro encontrado");

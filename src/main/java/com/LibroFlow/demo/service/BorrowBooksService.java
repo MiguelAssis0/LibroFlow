@@ -13,6 +13,7 @@ import com.LibroFlow.demo.repository.BookRepository;
 import com.LibroFlow.demo.repository.BorrowBookRepository;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,12 +45,14 @@ public class BorrowBooksService {
 
     }
 
+    @Cacheable("allBorrowedBooks")
     public List<BorrowBookProjectionDTO> getAllBorrowedBooks() {
         List<BorrowBookProjection> borrowBooks = borrowBookRepository.findAllBorrowedBooks();
         if(borrowBooks.isEmpty()) throw new EventNotFoundException("Nenhum empréstimo encontrado");
         return borrowBooks.stream().map(BorrowBookProjectionDTO::new).toList();
     }
 
+    @Cacheable("allReturnedBooks")
     public List<BorrowBookProjectionDTO> getAllReturnedBooks() {
         List<BorrowBookProjection> returnedBooks = borrowBookRepository.findAllReturnedBooks();
         if(returnedBooks.isEmpty()) throw new EventNotFoundException("Não há empréstimos retornados");
