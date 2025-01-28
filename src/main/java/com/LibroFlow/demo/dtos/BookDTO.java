@@ -7,8 +7,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
+import java.io.Serializable;
 
-public class BookDTO {
+
+public class BookDTO implements Serializable {
     private Long id;
     @NotBlank
     private String title;

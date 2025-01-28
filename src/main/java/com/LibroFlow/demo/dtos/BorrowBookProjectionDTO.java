@@ -2,10 +2,11 @@ package com.LibroFlow.demo.dtos;
 
 import com.LibroFlow.demo.projections.BorrowBookProjection;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class BorrowBookProjectionDTO {
+public class BorrowBookProjectionDTO implements Serializable {
     private String userName;
     private String bookTitle;
     private LocalDate borrowDate;

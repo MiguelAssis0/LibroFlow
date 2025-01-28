@@ -2,7 +2,9 @@ package com.LibroFlow.demo.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class ReturnBookDTO {
+import java.io.Serializable;
+
+public class ReturnBookDTO implements Serializable {
     @NotBlank
     private String username;
     @NotBlank

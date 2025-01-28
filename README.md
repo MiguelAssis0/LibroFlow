@@ -18,6 +18,12 @@ http://localhost:8080/swagger-ui/index.html
 ## Conexão no Banco de Dados
 O banco de dados utilizado, é o banco de dados h2, que já é criado automaticamente ao iniciar o projeto, aonde também, há algumas inserções iniciais para ver o projeto rodando. Você pode ver os inserções do banco de dados no arquivo import.sql, dentro da pasta resources.
 
+## Redis com Docker (Opcional)
+
+Será necessário rodar o comando docker:
+- docker run --name my-redis -p 6379:6379 -d redis <br/>
+Após instalar o redis, ele deverá estar no localhost, e deverá estar na porta 6379.
+
 ## Cadastro e Login
 
 Para cadastrar um usuário, é necessário acessar a rota:

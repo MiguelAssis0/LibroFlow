@@ -1,6 +1,8 @@
 package com.LibroFlow.demo.dtos;
 
-public class UserCredentialDTO {
+import java.io.Serializable;
+
+public class UserCredentialDTO implements Serializable {
     private String username;
     private String password;
 
