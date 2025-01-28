@@ -5,6 +5,7 @@ import com.LibroFlow.demo.entities.Book;
 import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +17,10 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    @Autowired
-    private CacheService cacheService;
-
+    @CachePut(value = "book")
     public void createBook(BookDTO dto){
         Book book = new Book(dto);
         bookRepository.save(book);
-        cacheService.evictAllCacheValues("book");
     }
 
     @Cacheable(value = "book")
@@ -38,12 +36,13 @@ public class BookService {
         return new BookDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 
+    @CachePut(value = "book")
     public void deleteBook(Long id){
         Book book = bookRepository.findById(id).orElseThrow(EventNotFoundException::new);
         bookRepository.delete(book);
-        cacheService.evictAllCacheValues("book");
     }
 
+    @CachePut(value = "book")
     public BookDTO updateBook(Long id, BookDTO dto){
         Book book = bookRepository.findById(id).orElseThrow(EventNotFoundException::new);
         if (dto.getTitle() != null) book.setTitle(dto.getTitle());
@@ -54,7 +53,6 @@ public class BookService {
         if(!Objects.equals(dto.getQuantity(), book.getQuantity()) && dto.getQuantity() > 0) book.setQuantity(dto.getQuantity());
 
         bookRepository.save(book);
-        cacheService.evictAllCacheValues("book");
         return new BookDTO(book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(), book.getDescription(), book.getQuantity(), book.getAvailable());
     }
 }

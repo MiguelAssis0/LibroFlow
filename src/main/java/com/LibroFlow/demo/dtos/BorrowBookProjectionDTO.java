@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 
-public class BorrowBookProjectionDTO implements Serializable {
+public class BorrowBookProjectionDTO {
     private String userName;
     private String bookTitle;
     private LocalDate borrowDate;

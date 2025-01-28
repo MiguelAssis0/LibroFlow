@@ -1,11 +1,11 @@
 package com.LibroFlow.demo.dtos;
 
 import com.LibroFlow.demo.entities.BorrowBook;
-import com.LibroFlow.demo.projections.BorrowBookProjection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+
 
 public class BorrowBookDTO {
     private Long userId;

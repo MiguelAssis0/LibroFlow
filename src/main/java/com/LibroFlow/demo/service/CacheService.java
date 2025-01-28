@@ -15,6 +15,4 @@ public class CacheService {
     public void evictAllCacheValues(String cacheName) {
         Objects.requireNonNull(cacheManager.getCache(cacheName)).clear();
     }
-
-
 }

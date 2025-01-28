@@ -9,6 +9,8 @@ import com.LibroFlow.demo.infra.exceptions.EventNotFoundException;
 import com.LibroFlow.demo.infra.security.EncryptPassword;
 import com.LibroFlow.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,6 +51,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username);
     }
 
+
+    @CachePut(value = "users")
     public UserDTO createUser(UserCreateDTO data) {
         data.setPassword(EncryptPassword.encryptPassword(data.getPassword()));
         User user = new User(data);
@@ -56,13 +60,11 @@ public class UserService implements UserDetailsService {
         if(userRepository.findByEmail(user.getEmail()) != null) throw new EventIllegalArgumentException("Email ja cadastrado");
         if(userRepository.findByUsername(user.getUsername()) != null) throw new EventIllegalArgumentException("Username ja cadastrado");
         userRepository.save(user);
-        cacheService.evictAllCacheValues("users");
         return new UserDTO(user);
     }
 
-
+    @CachePut(value = "users")
     public void removeUser(Long id) {
         userRepository.deleteById(id);
-        cacheService.evictAllCacheValues("users");
     }
 }

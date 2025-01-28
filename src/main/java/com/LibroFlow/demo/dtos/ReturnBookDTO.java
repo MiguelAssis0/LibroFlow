@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 
-public class ReturnBookDTO implements Serializable {
+public class ReturnBookDTO {
     @NotBlank
     private String username;
     @NotBlank
